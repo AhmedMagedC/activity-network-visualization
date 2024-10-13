@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 from graph import show_graph
-
+from algo import build_graphs
 data = []
 
 
@@ -51,6 +51,7 @@ def clear_table():
 
 # all the graph data will be taken from this function
 def submit():
+    build_graphs(data)
     show_graph(data)
 
 
