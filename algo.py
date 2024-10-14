@@ -1,4 +1,7 @@
 import queue
+from graph import show_graph
+
+
 
 graph1 = {}
 graph2={}
@@ -10,17 +13,8 @@ dur={}
 delay={}
 crit_path=[]
 end_point=""
-# Test 2: Medium example with parallel tasks
-test2 = [
-    ["A", 2, "-"],           # Task A takes 2 units of time, no dependencies
-    ["B", 5, "A"],        # Task B takes 5 units of time, depends on A
-    ["C", 1, "-"],           # Task C takes 1 unit of time, no dependencies
-    ["D", 3, "B"],        # Task D takes 3 units of time, depends on B
-    ["E", 2, "B"],        # Task E takes 2 units of time, depends on B
-    ["F", 4, "C"],        # Task F takes 4 units of time, depends on C
-    ["G", 3, "D,E"],   # Task G takes 3 units of time, depends on D and E
-    ["H", 2, "F"]         # Task H takes 2 units of time, depends on F
-]
+
+
 
 
 def get_early():
@@ -59,6 +53,8 @@ def build_graphs(data):
     get_delay(data)
     crit_path.append(end_point)
     calc_crit_path(end_point)
+    print(crit_path)
+    show_graph(data, early_starts, late_finish, dur, delay, crit_path)
 
 
 def get_late():
@@ -97,5 +93,5 @@ def calc_crit_path(node):
             calc_crit_path(val)
             return
 
-build_graphs(test2)
+
 
