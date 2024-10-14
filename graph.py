@@ -13,13 +13,12 @@ def show_graph(data, early_starts, late_finish, dur, delay, crit_path):
     # Add tasks and dependencies to the graph
     for val in data:
         task_name = val[0]
-        duration = val[1]
         early_start_time = early_starts[task_name]
         late_finish_time = late_finish[task_name]
         
         # Calculate early finish and late start
-        early_finish_time = early_start_time + duration
-        late_start_time = late_finish_time - duration
+        early_finish_time = early_start_time + dur[val[0]]
+        late_start_time = late_finish_time - dur[val[0]]
         
         # Add the task node
         G.add_node(task_name)
@@ -80,9 +79,8 @@ def show_graph(data, early_starts, late_finish, dur, delay, crit_path):
             # Add the task name at the center of the square
             plt.text(x, y, node, ha='center', va='center', fontsize=10, fontweight='bold')
 
-    # Add critical path text at a fixed location in the plot (bottom center)
+    # Add critical path text at a fixed location in the plot (bottom center) and reverse the critical path list
     plt.figtext(0.5, 0.01, f'Critical Path: {" -> ".join(crit_path[::-1])}', ha='center', fontsize=12, fontweight='bold')
-
 
     # Show the graph
     plt.axis('off')  # Turn off the axis
@@ -101,5 +99,4 @@ def get_layer(node, G):
             new_predecessors.extend(G.predecessors(pred))
         predecessors = new_predecessors
     return layer
-
 
