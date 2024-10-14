@@ -1,4 +1,7 @@
 import queue
+from graph import show_graph
+
+
 
 graph1 = {}
 graph2={}
@@ -59,6 +62,8 @@ def build_graphs(data):
     get_delay(data)
     crit_path.append(end_point)
     calc_crit_path(end_point)
+    print(crit_path)
+    show_graph(data, early_starts, late_finish, dur, delay, crit_path)
 
 
 def get_late():
